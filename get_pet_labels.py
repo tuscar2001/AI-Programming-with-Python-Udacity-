@@ -54,7 +54,7 @@ def get_pet_labels(image_dir):
     for idx in range(0, len(in_files), 1):
        # Skips file if starts with . (like .DS_Store of Mac OSX) because it 
        # isn't an pet image file
-       if in_files[idx][0] != ".":
+        if len(in_files) > 0:
            
            # Creates temporary label variable to hold pet label name extracted 
            pet_label = ""
@@ -66,18 +66,27 @@ def get_pet_labels(image_dir):
            #          extracted dog breed name in the variable pet_label 
            #          that's created as an empty string ABOVE
            tmp = in_files[idx].lower().split('_')
-           for elt in tmp:
-               if elt.isalpha():
-                   pet_label = pet_label + elt + " "    
+           for word in tmp:
+               if word.isalpha():
+                   pet_label += word + " "    
            pet_label = pet_label.strip()
            # If filename doesn't already exist in dictionary add it and it's
 #            # pet label - otherwise print an error message because indicates 
 #            # duplicate files (filenames)
-           if in_files[idx] not in results_dic:
+        #    if in_files[idx] not in results_dic:
  
-               results_dic[in_files[idx]] = [pet_label]
+        #        results_dic[in_files[idx]] = [pet_label]
               
-           else:
-               print("** Warning: Duplicate files exist in directory:", 
-                     in_files[idx])
+        #    else:
+        #        print("** Warning: Duplicate files exist in directory:", 
+        #              in_files[idx])
+            
+        if in_files[idx] not in results_dic:
+            results_dic[in_files[idx]] = [pet_label]
+        else:
+            print("** Warning: Key=", in_files[idx], 
+                "already exists in results_dic with value =", 
+                results_dic[in_files[idx]])    
+
+            
     return results_dic
