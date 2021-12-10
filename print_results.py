@@ -69,7 +69,7 @@ def print_results(results_dic, results_stats_dic, model,
     print("{:20}: {:3d}".format('N Not-Dog Images', results_stats_dic['n_notdogs_img']))
     print(" ")
     for key in results_stats_dic:
-        if results_stats_dic[key].startswith("p"):
+        if key.startswith("p"):
             print (key, results_stats_dic[key]) 
     if (print_incorrect_dogs and 
         ( (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'])
